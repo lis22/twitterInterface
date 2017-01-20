@@ -62,7 +62,7 @@ function getUserInfo(req, res, next) {
 function getTimeLine(req, res, next) {
     T.get('statuses/user_timeline', {count: 5 },  function (err, data) {
         if (err) {
-            err.message = 'Error connecting to Twitter. Could not get time line information';
+            err.message = 'Error connecting to Twitter. Could not get timeline information';
             return next(err);
         }
 
@@ -117,7 +117,7 @@ function getFriends(req, res, next) {
 function getDMsReceived(req, res, next) {
     T.get('direct_messages', {count: 5},  function (err, data) {
         if (err) {
-            err.message = 'Error connecting to Twitter. Could not direct messages received.';
+            err.message = 'Error connecting to Twitter. Could not get direct messages received.';
             return next(err);
         }
 
@@ -146,7 +146,7 @@ function getDMsReceived(req, res, next) {
 function getDMsSent(req, res, next) {
     T.get('direct_messages/sent', {count: 5}, function (err, data) {
         if (err) {
-            err.message = 'Error connecting to Twitter. Could not direct messages sent.';
+            err.message = 'Error connecting to Twitter. Could not get direct messages sent.';
             return next(err);
         }
 
