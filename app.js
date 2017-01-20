@@ -39,7 +39,6 @@ app.set('views', __dirname + '/views');
  */
 function getUserInfo(req, res, next) {
     T.get('users/show', { screen_name: config.screen_name }, function (err, data) {
-
         if (err) {
             err.message = 'Error connecting to Twitter. Could not get user information';
             return next(err);
@@ -117,7 +116,6 @@ function getFriends(req, res, next) {
  */
 function getDMsReceived(req, res, next) {
     T.get('direct_messages', {count: 5},  function (err, data) {
-
         if (err) {
             err.message = 'Error connecting to Twitter. Could not direct messages received.';
             return next(err);
@@ -147,7 +145,6 @@ function getDMsReceived(req, res, next) {
  */
 function getDMsSent(req, res, next) {
     T.get('direct_messages/sent', {count: 5}, function (err, data) {
-
         if (err) {
             err.message = 'Error connecting to Twitter. Could not direct messages sent.';
             return next(err);
@@ -176,7 +173,6 @@ function getDMsSent(req, res, next) {
  * @param next - Express next middleware function
  */
 function mergeDMs(req, res, next) {
-
     var format = 'ddd MMM DD hh:mm:ss Z YYYY';
     res.locals.msgsMerged = [];
     var i=0, j=0;
@@ -202,6 +198,7 @@ function mergeDMs(req, res, next) {
 
     next();
 }
+
 /**
  * addDMConversation: Keeps track of DM conversations
  * Since the DMs are sorted by timestamp, it looks at the previous message
@@ -253,6 +250,7 @@ function addRelativeTime(req, res, next) {
     }
     next();
 }
+
 /**
  * renderAppPage: Renders the index page. All required values are in res.locals
  * @param req - Express request object
@@ -263,7 +261,6 @@ function renderAppPage(req, res) {
 }
 
 app.get('/', getUserInfo, getTimeLine, getFriends, getDMsReceived, getDMsSent, mergeDMs, addDMConversation, addRelativeTime, renderAppPage);
-
 
 /**
  * Uses Twit to send status update to Twitter. Then refreshes the page
@@ -279,7 +276,6 @@ app.post('/', function(req, res, next) {
     });
 });
 
-
 /**
  * Used to catch all 404 errors.
  * EXTRA CREDIT
@@ -290,7 +286,6 @@ app.use(function(req,res,next) {
     next(err);
 });
 
-
 /**
  * Custom error handler that renders error page and sends the error
  * EXTRA CREDIT
@@ -298,6 +293,5 @@ app.use(function(req,res,next) {
 app.use(function(err, req, res, next) {
     res.render('error',{ error: err.message});
 });
-
 
 app.listen(3000);
