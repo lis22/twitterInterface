@@ -1,0 +1,22 @@
+ul.app--message--list
+    li
+        ul.app--message--conversation
+            each dm, index in msgsMerged
+
+               if index == 0 || dm.conversation != msgsMerged[index-1].conversation
+                   if index !=0
+                    hr(style="margin: 1.5rem")
+                   h3
+                       | Conversation with&nbsp;
+                       if (dm.recipient !== user.screenName)
+                            a #{dm.recipient}
+                       else
+                            a #{dm.screenName}
+
+               li(class=(dm.screenName !== user.screenName) ? 'app--message' : 'app--message--me')
+                   .app--avatar(style=`background-image: url(${dm.profilePic})`)
+                       img(src=`${dm.profilePic}`)
+                   p.app--message--text #{dm.message}
+                   p.app--message--timestamp #{dm.relativeTimeStamp}
+
+

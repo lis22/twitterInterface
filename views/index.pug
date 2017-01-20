@@ -1,0 +1,27 @@
+include partials/__head
+  body
+    include partials/__header.pug
+
+    include partials/__tweetFooter.pug
+
+    .bounds.app--body
+      .app--section--header
+        .grid-33
+          .app--section--heading
+            h2 Timeline
+        .grid-33
+          .app--section--heading
+            strong #{user.friendsCount}
+            h2 Following
+        .grid-33
+          .app--section--heading
+            h2 Direct Messages
+      .grid-33
+        .app--section
+          include partials/__tweetList
+      .grid-33
+        .app--section
+          include partials/__followingList
+      .grid-33
+        .app--section
+          include partials/__msgList
